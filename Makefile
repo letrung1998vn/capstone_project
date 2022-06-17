@@ -20,15 +20,19 @@ install:
 	pytest --version
 	echo
 	echo "Installing: shellcheck"
+	chmod +x ./bin/install_shellcheck.sh
 	./bin/install_shellcheck.sh
 	echo
 	echo "Installing: hadolint"
+	chmod +x /bin/install_hadolint.sh
 	./bin/install_hadolint.sh
 	echo
 	echo "Installing: kubectl"
+	chmod +x ./bin/install_kubectl.sh
 	./bin/install_kubectl.sh
 	echo
 	echo "Installing: eksctl"
+	chmod +x ./bin/install_eksctl.sh
 	./bin/install_eksctl.sh
 
 lint:
