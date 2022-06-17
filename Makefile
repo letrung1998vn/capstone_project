@@ -20,16 +20,16 @@ install:
 	pytest --version
 	echo
 	echo "Installing: shellcheck"
-	./bin/install_shellcheck.sh
+	sudo ./bin/install_shellcheck.sh
 	echo
 	echo "Installing: hadolint"
-	./bin/install_hadolint.sh
+	sudo ./bin/install_hadolint.sh
 	echo
 	echo "Installing: kubectl"
-	./bin/install_kubectl.sh
+	sudo ./bin/install_kubectl.sh
 	echo
 	echo "Installing: eksctl"
-	./bin/install_eksctl.sh
+	sudo ./bin/install_eksctl.sh
 
 lint:
 	# https://github.com/koalaman/shellcheck: a linter for shell scripts
