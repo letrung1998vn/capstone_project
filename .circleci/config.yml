@@ -1,0 +1,128 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@1.5.0
+
+jobs:
+  cicle-validation:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout
+      - run:
+          name: validate cicleci config
+          command: |
+            make ci-validate
+  init:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+            # fallback to using the latest cache if no exact match is found
+            # - v1-dependencies-
+      - run:
+          name: Install dependencies
+          command: |
+            python3 -m venv .devops-capstone
+            source .devops-capstone/bin/activate
+            make install
+      - save_cache:
+          paths:
+            - ./.devops-capstone # TODO: Include in cache the "bin" directory
+          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+      - run:
+          name: Run lint
+          command: |
+            source .devops-capstone/bin/activate
+            make lint
+  deploy-docker:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout
+      - run:
+          name: Deploy by makefile
+          command: |
+            make build-docker
+            make run-docker
+            make upload-docker
+  run-app:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            make run-app
+  create-resource:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout
+      - run:
+          name: create eks and start minikube
+          command: |
+            make eks-create-cluster
+            minikube start
+  deploy-eks:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout
+      - run:
+          name: deploy eks
+          command: |
+            make k8s-deployment
+            make port-forwarding
+  rolling-update:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Install tar utility
+          command: |
+            yum install -y tar gzip
+
+      - run:
+          name: update
+          no_output_timeout: 30m
+          command: |
+            make rolling-update
+
+  clean-up:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Delete resource
+          command: |
+            make k8s-cleanup-resource
+            make eks-delete-cluster
+
+workflows:
+  default:
+    jobs:
+      - cicle-validation:
+      - init:
+          require: cicle-validation
+      - docker/publish:
+          matrix:
+            parameters:
+              image: [$DOCKER_LOGIN/hello-app]
+              path: [hello_app]
+              docker-context: [hello_app]
+              deploy: [true]
+              # We publish two images with different version tags:
+              # - numbered version
+              # - "latest"
+              # tag: ['$(<hello_app/VERSION.txt)-${CIRCLE_SHA1:0:7}', 'latest']
+              tag: ["$(<hello_app/VERSION.txt)", "latest"]
+              update-description: [true]
+          requires: [init]
