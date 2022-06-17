@@ -24,7 +24,7 @@ install:
 	./bin/install_shellcheck.sh
 	echo
 	echo "Installing: hadolint"
-	chmod +x /bin/install_hadolint.sh
+	chmod +x ./bin/install_hadolint.sh
 	./bin/install_hadolint.sh
 	echo
 	echo "Installing: kubectl"
