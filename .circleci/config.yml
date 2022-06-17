@@ -111,7 +111,7 @@ workflows:
     jobs:
       - cicle-validation
       - init:
-          require: cicle-validation
+          requires: cicle-validation
       - docker/publish:
           matrix:
             parameters:
