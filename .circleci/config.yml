@@ -4,15 +4,6 @@ orbs:
   docker: circleci/docker@1.5.0
 
 jobs:
-  cicle-validation:
-    docker:
-      - image: python:3.7.3-stretch
-    steps:
-      - checkout
-      - run:
-          name: validate cicleci config
-          command: |
-            make ci-validate
   init:
     docker:
       - image: python:3.7.3-stretch
@@ -109,9 +100,7 @@ jobs:
 workflows:
   default:
     jobs:
-      - cicle-validation
       - init:
-          requires: [cicle-validation]
       - docker/publish:
           matrix:
             parameters:
