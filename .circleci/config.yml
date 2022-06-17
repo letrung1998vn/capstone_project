@@ -100,7 +100,7 @@ jobs:
 workflows:
   default:
     jobs:
-      - init:
+      - init
       - docker/publish:
           matrix:
             parameters:
