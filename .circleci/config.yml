@@ -48,7 +48,7 @@ jobs:
             make upload-docker
   create-resource:
     docker:
-      - image: python:3.7.3-stretch
+      - image: amazon/aws-cli
     steps:
       - checkout
       - restore_cache:
