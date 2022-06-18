@@ -121,12 +121,12 @@ workflows:
   default:
     jobs:
       - init
-      - run-app:
-          requires: [init]
       - deploy-docker: 
-          requires: [run-app]
-      - create-resource:
+          requires: [init]
+      - run-app:
           requires: [deploy-docker]
+      - create-resource:
+          requires: [run-app]
       - deploy-eks:
           requires: [create-resource]
       - rolling-update:
