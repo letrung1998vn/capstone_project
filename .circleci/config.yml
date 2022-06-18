@@ -54,6 +54,7 @@ jobs:
       - run:
           name: Deploy by makefile
           command: |
+            systemctl start docker
             make build-docker
             make run-docker
             make upload-docker
