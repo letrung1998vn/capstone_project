@@ -17,7 +17,7 @@ install:
 	pip install --upgrade pip &&\
 	pip install -r hello_app/requirements.txt
 	echo
-	python -m pytest --version
+	pytest --version
 	echo
 	echo "Installing: shellcheck"
 	chmod +x ./bin/install_shellcheck.sh
