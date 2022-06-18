@@ -4,7 +4,7 @@
 #Vars
 CLUSTER_NAME=hello
 REGION_NAME=us-east-1
-KEYPAIR_NAME=key-pair-us-west-2
+KEYPAIR_NAME=udapeople
 DEPLOYMENT_NAME=hello-app
 NEW_IMAGE_NAME=registry.hub.docker.com/gampie/hello-app:latest
 CONTAINER_PORT=80

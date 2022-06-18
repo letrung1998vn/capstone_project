@@ -47,7 +47,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install dependencies
+          name: run python app
           command: |
             make run-app
   create-resource:
@@ -72,7 +72,7 @@ jobs:
             make port-forwarding
   rolling-update:
     docker:
-      - image: amazon/aws-cli
+      - image: python:3.7.3-stretch
     steps:
       - checkout
       - run:
@@ -88,7 +88,7 @@ jobs:
 
   clean-up:
     docker:
-      - image: amazon/aws-cli
+      - image: python:3.7.3-stretch
     steps:
       - checkout
       - run:
@@ -101,17 +101,19 @@ workflows:
   default:
     jobs:
       - init
-      # - docker/publish:
-      #     matrix:
-      #       parameters:
-      #         image: [$DOCKER_LOGIN/hello-app]
-      #         path: [hello_app]
-      #         docker-context: [hello_app]
-      #         deploy: [true]
-      #         # We publish two images with different version tags:
-      #         # - numbered version
-      #         # - "latest"
-      #         # tag: ['$(<hello_app/VERSION.txt)-${CIRCLE_SHA1:0:7}', 'latest']
-      #         tag: ["$(<hello_app/VERSION.txt)", "latest"]
-      #         update-description: [true]
-      #     requires: [init]
+      - docker/publish:
+          matrix:
+            parameters:
+              image: [$DOCKER_LOGIN/hello-app]
+              path: [hello_app]
+              docker-context: [hello_app]
+              deploy: [true]
+              # We publish two images with different version tags:
+              # - numbered version
+              # - "latest"
+              # tag: ['$(<hello_app/VERSION.txt)-${CIRCLE_SHA1:0:7}', 'latest']
+              tag: ["$(<hello_app/VERSION.txt)", "latest"]
+              update-description: [true]
+          requires: [init]
+      - clean-up:
+          requires: [docker/publish]
