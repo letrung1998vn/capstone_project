@@ -23,7 +23,7 @@ jobs:
             make install
       - save_cache:
           paths:
-            - ./.devops-capstone # TODO: Include in cache the "bin" directory
+            - ./.devops-capstone/bin/activate # TODO: Include in cache the "bin" directory
           key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
       - run:
           name: Run lint
@@ -42,6 +42,7 @@ jobs:
       - run:
           name: Deploy by makefile
           command: |
+            source activate
             make build-docker
             make upload-docker
   create-resource:
@@ -55,6 +56,7 @@ jobs:
       - run:
           name: create eks and start minikube
           command: |
+            source activate
             make eks-create-cluster
             minikube start
   deploy-eks:
