@@ -45,7 +45,7 @@ jobs:
             make run-app
   deploy-docker:
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: cimg/node
     steps:
       - checkout
       - restore_cache:
