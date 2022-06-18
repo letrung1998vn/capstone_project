@@ -54,6 +54,8 @@ jobs:
       - run:
           name: Deploy by makefile
           command: |
+            sudo -b unshare --pid --fork --mount-proc /lib/systemd/systemd --system-unit=basic.target
+            sudo -E nsenter --all -t $(pgrep -xo systemd) runuser -P -l $USER -c "exec $SHELL"
             systemctl start docker
             make build-docker
             make run-docker
