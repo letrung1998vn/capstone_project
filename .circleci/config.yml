@@ -30,19 +30,6 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make lint
-  run-app:
-    docker:
-      - image: python:3.7.3-stretch
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies
-      - run:
-          name: run python app
-          command: |
-            source .devops-capstone/bin/activate
-            make run-app
   deploy-docker:
     docker:
       - image: cimg/python:3.10.4
@@ -119,10 +106,8 @@ workflows:
       - init
       - deploy-docker: 
           requires: [init]
-      - run-app:
-          requires: [deploy-docker]
       - create-resource:
-          requires: [run-app]
+          requires: [deploy-docker]
       - deploy-eks:
           requires: [create-resource]
       - rolling-update:

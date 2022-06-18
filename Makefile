@@ -44,9 +44,6 @@ lint:
 	# This should be run from inside a virtualenv
 	pylint --output-format=colorized --disable=C hello_app/hello.py
 
-run-app:
-	python3 hello_app/hello.py
-
 build-docker:
 	chmod +x ./bin/build_docker.sh
 	./bin/build_docker.sh
