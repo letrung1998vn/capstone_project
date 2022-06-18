@@ -48,7 +48,7 @@ jobs:
             make upload-docker
   create-resource:
     docker:
-      - image: python:3.7.3-stretch
+      - image: python:3.9.1-alpine3.12
     steps:
       - checkout
       - restore_cache:
