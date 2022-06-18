@@ -54,8 +54,8 @@ jobs:
       - run:
           name: Deploy by makefile
           command: |
-            source .devops-capstone/bin/activate
             apk add docker-cli
+            source .devops-capstone/bin/activate
             make build-docker
             make run-docker
             make upload-docker
