@@ -64,6 +64,7 @@ jobs:
           name: create eks and start minikube
           command: |
             source .devops-capstone/bin/activate
+            cd ..
             make eks-create-cluster
             minikube start
   deploy-eks:
