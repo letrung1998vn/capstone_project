@@ -2,5 +2,5 @@
 
 echo
 echo "Creating cluster..."
-./bin/eksctl create cluster -f hello_cluster.yml
+aws eks update-kubeconfig -f hello_cluster.yml
 
