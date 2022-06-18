@@ -51,10 +51,6 @@ build-docker:
 	chmod +x ./bin/build_docker.sh
 	./bin/build_docker.sh
 
-run-docker: build-docker
-	chmod +x ./bin/run_docker.sh
-	./bin/run_docker.sh
-
 upload-docker: build-docker
 	chmod +x ./bin/upload_docker.sh
 	./bin/upload_docker.sh

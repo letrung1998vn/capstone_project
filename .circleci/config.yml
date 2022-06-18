@@ -56,7 +56,6 @@ jobs:
           name: Deploy by makefile
           command: |
             make build-docker
-            make run-docker
             make upload-docker
   create-resource:
     docker:
