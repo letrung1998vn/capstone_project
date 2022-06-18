@@ -65,7 +65,6 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make eks-create-cluster
-            minikube start
   deploy-eks:
     docker:
       - image: python:3.7.3-stretch
@@ -84,6 +83,7 @@ jobs:
           name: deploy eks
           command: |
             source .devops-capstone/bin/activate
+            minikube start
             make k8s-deployment
             make port-forwarding
   rolling-update:
