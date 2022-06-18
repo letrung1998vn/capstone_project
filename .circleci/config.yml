@@ -55,9 +55,14 @@ jobs:
           keys:
             - v1-dependencies
       - run:
-          name: create eks and start minikube
+          name: install dependency
           command: |
             python3 -m venv .devops-capstone
+            source .devops-capstone/bin/activate
+            make install
+      - run:
+          name: create eks and start minikube
+          command: |
             source .devops-capstone/bin/activate
             make eks-create-cluster
             minikube start
@@ -70,9 +75,14 @@ jobs:
           keys:
             - v1-dependencies
       - run:
-          name: deploy eks
+          name: install dependency
           command: |
             python3 -m venv .devops-capstone
+            source .devops-capstone/bin/activate
+            make install
+      - run:
+          name: deploy eks
+          command: |
             source .devops-capstone/bin/activate
             make k8s-deployment
             make port-forwarding
