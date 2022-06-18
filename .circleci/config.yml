@@ -40,8 +40,7 @@ jobs:
             - v1-dependencies
       - run:
           name: run python app
-          command: |
-            source .devops-capstone/bin/activate
+          command: 
             make run-app
   deploy-docker:
     docker:
@@ -54,7 +53,6 @@ jobs:
       - run:
           name: Deploy by makefile
           command: |
-            source .devops-capstone/bin/activate
             make build-docker
             make run-docker
             make upload-docker
@@ -69,7 +67,6 @@ jobs:
       - run:
           name: create eks and start minikube
           command: |
-            source .devops-capstone/bin/activate
             make eks-create-cluster
             minikube start
   deploy-eks:
@@ -83,7 +80,6 @@ jobs:
       - run:
           name: deploy eks
           command: |
-            source .devops-capstone/bin/activate
             make k8s-deployment
             make port-forwarding
   rolling-update:
@@ -103,7 +99,6 @@ jobs:
           name: update
           no_output_timeout: 30m
           command: |
-            source .devops-capstone/bin/activate
             make rolling-update
 
   clean-up:
