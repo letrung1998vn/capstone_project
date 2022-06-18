@@ -48,12 +48,15 @@ run-app:
 	python3 hello_app/hello.py
 
 build-docker:
+	chmod +x ./bin/build_docker.sh
 	./bin/build_docker.sh
 
 run-docker: build-docker
+	chmod +x ./bin/run_docker.sh
 	./bin/run_docker.sh
 
 upload-docker: build-docker
+	chmod +x ./bin/upload_docker.sh
 	./bin/upload_docker.sh
 
 ci-validate:
@@ -62,6 +65,7 @@ ci-validate:
 
 k8s-deployment: eks-create-cluster
 	# If using minikube, first run: minikube start
+	chmod +x ./bin/k8s_deployment.sh
 	./bin/k8s_deployment.sh
 
 port-forwarding: 
@@ -91,9 +95,11 @@ rollback:
 	${KUBECTL} get deployments -o wide
 
 k8s-cleanup-resources:
+	chmod +x ./bin/k8s_cleanup_resources.sh
 	./bin/k8s_cleanup_resources.sh
 
 eks-create-cluster:
+	chmod +x ./bin/eks_create_cluster.sh
 	./bin/eks_create_cluster.sh
 
 eks-delete-cluster:
