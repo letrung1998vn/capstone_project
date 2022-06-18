@@ -35,7 +35,7 @@ jobs:
       - image: python:3.7.3-stretch
     steps:
       - checkout
-      restore_cache:
+      - restore_cache:
           keys:
             - v1-dependencies
       - run:
@@ -48,7 +48,7 @@ jobs:
       - image: python:3.7.3-stretch
     steps:
       - checkout
-       restore_cache:
+      - restore_cache:
           keys:
             - v1-dependencies
       - run:
@@ -63,7 +63,7 @@ jobs:
       - image: python:3.7.3-stretch
     steps:
       - checkout
-       restore_cache:
+      - restore_cache:v
           keys:
             - v1-dependencies
       - run:
@@ -77,7 +77,7 @@ jobs:
       - image: python:3.7.3-stretch
     steps:
       - checkout
-       restore_cache:
+      - restore_cache:
           keys:
             - v1-dependencies
       - run:
@@ -91,7 +91,7 @@ jobs:
       - image: python:3.7.3-stretch
     steps:
       - checkout
-       restore_cache:
+      - restore_cache:
           keys:
             - v1-dependencies
       - run:
