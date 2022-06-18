@@ -42,7 +42,6 @@ jobs:
       - run:
           name: Deploy by makefile
           command: |
-            source .devops-capstone/bin/activate
             make build-docker
             make upload-docker
   create-resource:
@@ -56,7 +55,6 @@ jobs:
       - run:
           name: create eks and start minikube
           command: |
-            source .devops-capstone/bin/activate
             make eks-create-cluster
             minikube start
   deploy-eks:
@@ -70,7 +68,6 @@ jobs:
       - run:
           name: deploy eks
           command: |
-            source .devops-capstone/bin/activate
             make k8s-deployment
             make port-forwarding
   rolling-update:
