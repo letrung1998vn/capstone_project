@@ -13,17 +13,17 @@ REPLICAS=4
 dockerpath=${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:${VERSION}
 
 # Run the Docker Hub container with kubernetes
-kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath} --replicas=${REPLICAS} &&
-    kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}
+./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath} --replicas=${REPLICAS} &&
+    ./bin/kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}
 
 # List kubernetes resources
 echo
 echo "Listing deployments"
-kubectl get deployments -o wide
+./bin/kubectl get deployments -o wide
 echo
 echo "Listing services"
-kubectl get services -o wide
+./bin/kubectl get services -o wide
 echo
 echo "Listing pods"
-kubectl get pods -o wide
+./bin/kubectl get pods -o wide
 
