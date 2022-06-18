@@ -30,17 +30,6 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make lint
-  deploy-docker:
-    docker:
-      - image: python:3.7.3-stretch
-    steps:
-      - checkout
-      - run:
-          name: Deploy by makefile
-          command: |
-            make build-docker
-            make run-docker
-            make upload-docker
   run-app:
     docker:
       - image: python:3.7.3-stretch
@@ -49,7 +38,20 @@ jobs:
       - run:
           name: run python app
           command: |
+            source .devops-capstone/bin/activate
             make run-app
+  deploy-docker:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout
+      - run:
+          name: Deploy by makefile
+          command: |
+            source .devops-capstone/bin/activate
+            make build-docker
+            make run-docker
+            make upload-docker
   create-resource:
     docker:
       - image: python:3.7.3-stretch
@@ -58,6 +60,7 @@ jobs:
       - run:
           name: create eks and start minikube
           command: |
+            source .devops-capstone/bin/activate
             make eks-create-cluster
             minikube start
   deploy-eks:
@@ -68,6 +71,7 @@ jobs:
       - run:
           name: deploy eks
           command: |
+            source .devops-capstone/bin/activate
             make k8s-deployment
             make port-forwarding
   rolling-update:
@@ -84,6 +88,7 @@ jobs:
           name: update
           no_output_timeout: 30m
           command: |
+            source .devops-capstone/bin/activate
             make rolling-update
 
   clean-up:
