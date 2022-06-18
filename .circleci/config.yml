@@ -38,10 +38,11 @@ jobs:
       - setup_remote_docker
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+            - v1-dependencies
       - run:
           name: Deploy by makefile
           command: |
+            source .devops-capstone/bin/activate
             make build-docker
             make upload-docker
   create-resource:
@@ -51,10 +52,11 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+            - v1-dependencies
       - run:
           name: create eks and start minikube
           command: |
+            source .devops-capstone/bin/activate
             make eks-create-cluster
             minikube start
   deploy-eks:
@@ -64,10 +66,11 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+            - v1-dependencies
       - run:
           name: deploy eks
           command: |
+            source .devops-capstone/bin/activate
             make k8s-deployment
             make port-forwarding
   rolling-update:
@@ -77,7 +80,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+            - v1-dependencies
       - run:
           name: Install tar utility
           command: |
@@ -87,6 +90,7 @@ jobs:
           name: update
           no_output_timeout: 30m
           command: |
+            source .devops-capstone/bin/activate
             make rolling-update
 
   clean-up:
