@@ -6,7 +6,7 @@ CLUSTER_NAME=hello
 REGION_NAME=us-east-1
 KEYPAIR_NAME=udapeople
 DEPLOYMENT_NAME=hello-app
-NEW_IMAGE_NAME=registry.hub.docker.com/gampie/hello-app:latest
+NEW_IMAGE_NAME=registry.hub.docker.com/letrung1998vn/hello-app:latest
 CONTAINER_PORT=80
 HOST_PORT=8080
 KUBECTL=./bin/kubectl
@@ -17,7 +17,7 @@ install:
 	pip install --upgrade pip &&\
 	pip install -r hello_app/requirements.txt
 	echo
-	pytest --version
+	python -m pytest --version
 	echo
 	echo "Installing: shellcheck"
 	chmod +x ./bin/install_shellcheck.sh
