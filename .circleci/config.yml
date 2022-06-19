@@ -61,6 +61,7 @@ jobs:
             sudo apt-get install awscli
             sudo apt-get install build-essential
             sudo apt-get install python3
+            sudo apt-get upgrade
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make install
