@@ -80,7 +80,7 @@ jobs:
       - run:
           name: install dependency
           command: |
-            yum install -y tar gzip curl
+            apt-get install -y tar gzip curl
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make install
