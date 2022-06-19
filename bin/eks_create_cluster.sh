@@ -4,6 +4,6 @@ echo
 echo "Creating cluster..."
 aws configure import --csv  file://new_user_credentials.csv
 aws configure set region us-east-1 --profile new_user_credentials
-echo aws sts get-caller-identity
+aws sts get-caller-identity
 ./bin/eksctl create cluster --config-file=hello_cluster.yml
 
