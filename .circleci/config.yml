@@ -128,7 +128,7 @@ workflows:
       - init
       - deploy-docker:
           requires: [init]
-      - create-resource
+      - create-resource:
           requires: [deploy-docker]
       - deploy-eks:
           requires: [create-resource]
