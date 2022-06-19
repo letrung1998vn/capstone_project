@@ -10,8 +10,7 @@ In this project I applied the skills and knowledge which were developed througho
 - Working in AWS
 - Using Circle CI to implement Continuous Integration and Continuous Deployment
 - Building pipelines
-- Working with CloudFormation to deploy clusters
-- Building Kubernetes clusters
+- Deploy cluster using eksctl and kubectl
 - Building Docker containers in pipelines
 
 ### Project Tasks
@@ -26,18 +25,11 @@ The project includes the following main tasks:
   * Lints shell scripts, Dockerfile and python code
 * Create a Dockerfile to "containerize" the [hello](/hello_app/hello.py) application: [Dockerfile](hello_app/Dockerfile)
 * Deploy to a public Docker Registry:
- [Docker Hub](https://hub.docker.com/repository/docker/gampie/hello-app) the containerized application
+ [Docker Hub](https://hub.docker.com/repository/docker/letrung1998vn/hello-world-app) the containerized application
 * Deploy a Kubernetes cluster:  `make eks-create-cluster`
 * Deploy the application:  `make k8s-deployment`
 * Update the app in the cluster, using a rolling-update strategy:  `make rolling-update`
 * Delete the cluster:  `make eks-delete-cluster`
-
-The CirclCI pipeline([config.yml](.circleci/config.yml)) will execute the following steps automatically:
-
-* `make setup`
-* `make install`
-* `make lint`
-* Build and publish the container image `docker/publish`
   
 ### Files
 
