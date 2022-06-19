@@ -6,6 +6,7 @@ metadata:
   region: us-east-1
 
 iam:
+  serviceRoleARN: arn:aws:iam::407769180624:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS
   withOIDC: true
 nodeGroups:
   - name: ng-1
