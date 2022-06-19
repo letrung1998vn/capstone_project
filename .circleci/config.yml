@@ -84,6 +84,7 @@ jobs:
             yum update -y
             yum groupinstall -y 'Development Tools'
             yum install -y python3
+            yum install -y python3-pip
             yum upgrade
             make install
       - run:
