@@ -81,10 +81,10 @@ jobs:
       - run:
           name: install dependency
           command: |
-            apt update
-            apt-get install -y tar gzip
-            apt-get install python3
-            apt upgrade
+            apt-get update
+            apt-get install -y tar gzip curl
+            apt-get install -y python3
+            apt-get upgrade
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make install
