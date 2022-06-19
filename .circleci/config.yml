@@ -87,14 +87,14 @@ jobs:
       - run:
           name: deploy eks
           command: |
-            curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64 \
+            curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm \
             && chmod +x minikube
             mkdir -p /usr/local/bin/
             install minikube /usr/local/bin/
             source .devops-capstone/bin/activate
             minikube start
-            make k8s-deployment
-            make port-forwarding
+            # make k8s-deployment
+            # make port-forwarding
   rolling-update:
     docker:
       - image: python:3.7.3-stretch
@@ -130,13 +130,13 @@ jobs:
 workflows:
   default:
     jobs:
-      - init
-      - deploy-docker:
-          requires: [init]
-      - create-resource:
-          requires: [deploy-docker]
-      - deploy-eks:
-          requires: [create-resource]
+      # - init
+      # - deploy-docker:
+      #     requires: [init]
+      # - create-resource:
+      #     requires: [deploy-docker]
+      - deploy-eks
+          # requires: [create-resource]
       - rolling-update:
           requires: [deploy-eks]
       - clean-up:
