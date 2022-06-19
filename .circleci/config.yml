@@ -59,7 +59,7 @@ jobs:
           command: |
             apk add --update curl nodejs npm
             pip install awscli
-            apt-get install build-essential
+            yum install -y build-essential
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make install
