@@ -71,7 +71,7 @@ jobs:
             make eks-create-cluster
   deploy-eks:
     docker:
-      - image: python:3.7.3-stretch
+      - image: cimg/python:3.10.4
     steps:
       - checkout
       - setup_remote_docker
@@ -94,6 +94,7 @@ jobs:
             mkdir -p /usr/local/bin/
             install minikube /usr/local/bin/
             minikube start --driver=docker
+            minikube config set driver docker
             # make k8s-deployment
             # make port-forwarding
   rolling-update:
