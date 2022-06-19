@@ -115,7 +115,7 @@ jobs:
     docker:
       - image: python:3.7.3-stretch
     steps:
-      - checkout  
+      - checkout
       - run:
           name: Delete resource
           command: |
@@ -126,7 +126,7 @@ workflows:
   default:
     jobs:
       - init
-      - deploy-docker: 
+      - deploy-docker:
           requires: [init]
       - create-resource:
           requires: [deploy-docker]
