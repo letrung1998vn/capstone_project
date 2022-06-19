@@ -48,7 +48,7 @@ jobs:
             make upload-docker
   create-resource:
     docker:
-      - image: python:3.7.3-stretch
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -57,8 +57,10 @@ jobs:
       - run:
           name: install dependency
           command: |
-            pip install awscli
-            yum install -y build-essential
+            sudo apt-get update
+            sudo apt-get install awscli
+            sudo apt-get install build-essential
+            sudo apt-get install python3
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make install
