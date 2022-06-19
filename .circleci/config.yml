@@ -95,8 +95,7 @@ jobs:
             && chmod +x minikube
             mkdir -p /usr/local/bin/
             install minikube /usr/local/bin/
-            minikube start --driver=docker
-            minikube config set driver docker
+            minikube start
             # make k8s-deployment
             # make port-forwarding
   rolling-update:
