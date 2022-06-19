@@ -84,8 +84,9 @@ jobs:
             yum update -y
             yum groupinstall -y 'Development Tools'
             yum install -y python3
-            yum install -y python3-pip
             yum upgrade
+            python3 -m venv .devops-capstone
+            source .devops-capstone/bin/activate
             make install
       - run:
           name: deploy eks
