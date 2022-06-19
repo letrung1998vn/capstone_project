@@ -90,8 +90,6 @@ jobs:
             source .devops-capstone/bin/activate
             curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64 \
             && chmod +x minikube
-            mkdir -p /usr/local/bin/
-            install minikube /usr/local/bin/
             minikube start
             # make k8s-deployment
             # make port-forwarding
