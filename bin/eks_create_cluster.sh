@@ -2,5 +2,5 @@
 
 echo
 echo "Creating cluster..."
-aws eks update-kubeconfig --region us-east-1 --name capstoneCluster
+./bin/eksctl create cluster --config-file=hello_cluster.yml
 
