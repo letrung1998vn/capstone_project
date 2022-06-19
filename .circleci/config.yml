@@ -80,6 +80,7 @@ jobs:
       - run:
           name: install dependency
           command: |
+            yum install -y tar gzip curl
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make install
@@ -87,6 +88,8 @@ jobs:
           name: deploy eks
           command: |
             source .devops-capstone/bin/activate
+            curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+            && chmod +x minikube
             minikube start
             make k8s-deployment
             make port-forwarding
