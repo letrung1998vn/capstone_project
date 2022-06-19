@@ -57,10 +57,10 @@ jobs:
       - run:
           name: install dependency
           command: |
-            yum update
-            yum groupinstall 'Development Tools'
-            yum install python3
-            yum install python3-venv
+            yum update -y
+            yum groupinstall -y 'Development Tools'
+            yum install -y python3
+            yum install -y python3-venv
             yum upgrade
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
