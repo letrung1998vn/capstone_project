@@ -58,7 +58,7 @@ jobs:
           name: install dependency
           command: |
             yum update
-            yum install build-essential
+            yum groupinstall 'Development Tools'
             yum install python3
             yum install python3-venv
             yum upgrade
