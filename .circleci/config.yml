@@ -71,13 +71,20 @@ jobs:
             make eks-create-cluster
   deploy-eks:
     docker:
-      - image: cimg/python:3.10.4
+      - image: amazon/aws-cli
     steps:
       - checkout
       - setup_remote_docker
       - restore_cache:
           keys:
             - v1-dependencies
+      - run:
+          name: Install dependencies
+          command: |
+            yum update -y
+            yum groupinstall -y 'Development Tools'
+            yum install -y python3
+            yum upgrade
       - run:
           name: deploy eks
           command: |
