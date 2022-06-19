@@ -48,7 +48,7 @@ jobs:
             make upload-docker
   create-resource:
     docker:
-      - image: circleci/node:13.8.0
+      - image: amazon/aws-cli
     steps:
       - checkout
       - restore_cache:
@@ -57,12 +57,11 @@ jobs:
       - run:
           name: install dependency
           command: |
-            sudo apt-get update
-            sudo apt-get install awscli
-            sudo apt-get install build-essential
-            sudo apt-get install python3
-            sudo apt-get install python3-venv
-            sudo apt-get upgrade
+            yum update
+            yum install build-essential
+            yum install python3
+            yum install python3-venv
+            yum upgrade
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make install
