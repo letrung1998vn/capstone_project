@@ -71,7 +71,7 @@ jobs:
             make eks-create-cluster
   deploy-eks:
     docker:
-      - image: cimg/python:3.10.4
+      - image: ubuntu:latest
     steps:
       - checkout
       - setup_remote_docker
