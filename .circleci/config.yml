@@ -81,7 +81,7 @@ jobs:
       - run:
           name: install dependency
           command: |
-            apt-get install -y tar gzip curl
+            sudo apt-get install -y tar gzip curl
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make install
