@@ -87,8 +87,10 @@ jobs:
       - run:
           name: deploy eks
           command: |
-            curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64
-            install minikube-linux-arm64 /usr/local/bin/minikube
+            curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64 \
+            && chmod +x minikube
+            mkdir -p /usr/local/bin/
+            install minikube /usr/local/bin/
             source .devops-capstone/bin/activate
             minikube start
             make k8s-deployment
