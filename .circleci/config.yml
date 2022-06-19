@@ -85,13 +85,10 @@ jobs:
             apt-get install -y tar gzip curl
             apt-get install -y python3
             apt-get upgrade -y
-            python3 -m venv .devops-capstone
-            source .devops-capstone/bin/activate
             make install
       - run:
           name: deploy eks
           command: |
-            source .devops-capstone/bin/activate
             curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
             && chmod +x minikube
             mkdir -p /usr/local/bin/
