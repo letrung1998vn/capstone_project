@@ -2,8 +2,8 @@
 # This file tags and uploads an image to Docker Hub
 
 # Assumes that an image is built via `run_docker.sh`
-DOCKER_REPOSITORY="hello-app"
-CONTAINER_NAME="letrung1998vn/hello-app"
+DOCKER_REPOSITORY="hello-world-app"
+CONTAINER_NAME="letrung1998vn/hello-world-app"
 VERSION="1.000"
 DOCKER_USER="letrung1998vn"
 DOCKER_PWD="socnhi.com1234"

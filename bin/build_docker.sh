@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONTAINER_NAME="letrung1998vn/hello-app"
+CONTAINER_NAME="letrung1998vn/hello-world-app"
 VERSION=1.000
 
 # Step 1:

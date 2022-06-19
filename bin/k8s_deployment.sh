@@ -4,7 +4,7 @@
 
 # Set vars
 DOCKER_HUB_ID="registry.hub.docker.com/letrung1998vn"
-DOCKER_REPOSITORY="hello-app"
+DOCKER_REPOSITORY="hello-world-app"
 DEPLOYMENT_NAME=${DOCKER_REPOSITORY}
 CONTAINER_PORT=80
 VERSION=1.000

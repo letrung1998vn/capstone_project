@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CONTAINER_NAME="letrung1998vn/hello-app"
+CONTAINER_NAME="letrung1998vn/hello-world-app"
 VERSION=1.000
 CONTAINER_PORT=80
 HOST_PORT=80
