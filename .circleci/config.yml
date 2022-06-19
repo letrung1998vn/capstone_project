@@ -85,6 +85,7 @@ jobs:
             yum groupinstall -y 'Development Tools'
             yum install -y python3
             yum upgrade
+            make install
       - run:
           name: deploy eks
           command: |
