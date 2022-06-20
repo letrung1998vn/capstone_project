@@ -1,13 +1,9 @@
-
-#Vars
-CLUSTER_NAME=capstone-cluster
-REGION_NAME=us-east-1
-DEPLOYMENT_NAME=hello-world-app
-CONTAINER_PORT=80
-KUBECTL=./bin/kubectl
+setup:
+	# Create python venv and source it
+	# python3 -m venv ~/.final-project
+	# source ~/.final-project/bin/active
 
 install:
-
 	echo "Installing: dependencies..."
 	pip install --upgrade pip &&\
 	pip install -r hello_app/requirements.txt
@@ -31,13 +27,10 @@ install:
 	./bin/install_eksctl.sh
 
 lint:
-	# https://github.com/koalaman/shellcheck: a linter for shell scripts
 	./bin/shellcheck -Cauto -a ./bin/*.sh
-	# https://github.com/hadolint/hadolint: a linter for Dockerfiles
 	./bin/hadolint hello_app/Dockerfile
-	# https://www.pylint.org/: a linter for Python source code 
-	# This should be run from inside a virtualenv
-	pylint --output-format=colorized --disable=C hello_app/hello.py
+	pylint --disable=R,C,W1203,W1202 python-app/app.py
+	pylint --disable=R,C,W1203,W1202 python-app-update/app.py
 
 build-docker-v1:
 	chmod +x ./bin/build_docker-v1.sh
@@ -52,24 +45,21 @@ build-docker-v2:
 	./bin/build_docker.sh
 
 k8s-deployment:
-	chmod +x ./bin/k8s_deployment.sh
-	./bin/k8s_deployment.sh
+	chmod +x ./bin/kubectl_deploy.sh
+	./bin/kubectl_deploy.sh
 
 rollout-status:
-	aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
-	${KUBECTL} get svc
-	${KUBECTL} rollout status deployment ${DEPLOYMENT_NAME}
-	echo
-	${KUBECTL} get deployments -o wide
+	chmod +x ./bin/rollout_status.sh
+	./bin/rollout_status.sh
 
 k8s-cleanup-resources:
-	chmod +x ./bin/k8s_cleanup_resources.sh
-	./bin/k8s_cleanup_resources.sh
+	chmod +x ./bin/kubectl_clean.sh
+	./bin/kubectl_clean.sh
 
 eks-create-cluster:
 	chmod +x ./bin/eks_create_cluster.sh
 	./bin/eks_create_cluster.sh
 
 eks-delete-cluster:
-	./bin/eksctl delete cluster --name "${CLUSTER_NAME}" \
-		--region "${REGION_NAME}"
+	chmod +x ./bin/eksctl_delete.sh
+	./bin/eksctl_delete.sh

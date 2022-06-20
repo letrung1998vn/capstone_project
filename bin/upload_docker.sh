@@ -4,7 +4,7 @@
 # Assumes that an image is built via `run_docker.sh`
 DOCKER_REPOSITORY="hello-world-app"
 CONTAINER_NAME="letrung1998vn/hello-world-app"
-VERSION="1.000"
+VERSION="lastest"
 DOCKER_USER="letrung1998vn"
 DOCKER_PWD="socnhi.com1234"
 # Step 1:

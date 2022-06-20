@@ -21,8 +21,8 @@ In this project I applied the skills and knowledge which were developed througho
 5. `cluster.yml`: EKS cluster definition file
   
 # For rolling Deveopment
-I made two application which tagged v1 and v2 respectively for demonstrating the rolling update.
-I deployed the cluster with the v1 application first then updated the docker image to v2 and did the rolling update.
+I made two application, one in python-app folder as v1 app and one in python-app-update folder as v2 for demonstrating the rolling update.
+I deployed the cluster with the v1 application in python-app folder first then updated the docker image with v2 application in python-app-update folder and did the rolling update.
 
 All screenshots are attached in images folder.
 
@@ -33,8 +33,9 @@ The following shell scripts are invoked from the [Makefile](./Makefile)
 * [install_hadolint.sh](./bin/install_hadolint.sh): installs the hadolint linter
 * [install_kubectl.sh](./bin/install_kubectl.sh): installs the kubectl tool
 * [install_shellcheck.sh](./bin/install_shellcheck.sh): installs the shellcheck(for shell scripts) linter tool
-* [k8s_cleanup_resources.sh](./bin/k8s_cleanup_resources.sh): deletes services and deployments
-* [k8s_deployment.sh](./bin/k8s_deployment.sh): deploys app into cluster
+* [kubectl_delete.sh](./bin/kubectl_delete.sh): deletes services and deployments
+* [kubectl_deploy.sh](./bin/kubectl_deploy.sh): deploys app into cluster
 * [build_docker-v1.sh](./bin/build_docker-v1.sh): build docker image with v1 app
 * [build_docker-v2.sh](./bin/build_docker-v1.sh): build docker image with v2 app
 * [upload_docker.sh](./bin/upload_docker.sh): upload docker image to repository
+* [eksctl_delete.sh](./bin/eksctl_delete.sh): delete cluster by eksctl
