@@ -19,8 +19,6 @@ aws sts get-caller-identity
 # Create config file
 aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
 ./bin/kubectl get svc
-# Apply config
-./bin/kubectl apply -f /root/.kube/config
 # Run the Docker Hub container with kubernetes
 ./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
 
