@@ -26,7 +26,7 @@ echo "Create deployment"
 # ./bin/kubectl apply -f /root/.kube/config
 ./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
 # ./bin/kubectl edit deployment ${DEPLOYMENT_NAME}
-
+./bin/kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}
 # List kubernetes resources
 echo
 echo "Listing deployments"
