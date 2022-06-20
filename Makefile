@@ -38,7 +38,7 @@ build-docker-v1:
 	./bin/build_docker-v1.sh
 
 upload-docker:
-	chmod +x ./bin/upload_docker-v1.sh
+	chmod +x ./bin/upload_docker.sh
 	./bin/upload_docker.sh
 
 build-docker-v2:
