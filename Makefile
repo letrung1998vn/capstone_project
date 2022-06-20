@@ -35,7 +35,7 @@ lint:
 
 build-docker-v1:
 	chmod +x ./bin/build_docker-v1.sh
-	./bin/build_docker.sh
+	./bin/build_docker-v1.sh
 
 upload-docker:
 	chmod +x ./bin/upload_docker-v1.sh
@@ -43,7 +43,7 @@ upload-docker:
 
 build-docker-v2:
 	chmod +x ./bin/build_docker-v2.sh
-	./bin/build_docker.sh
+	./bin/build_docker-v2.sh
 
 k8s-deployment:
 	chmod +x ./bin/kubectl_deploy.sh
@@ -54,8 +54,8 @@ rollout-status:
 	./bin/rollout_status.sh
 
 k8s-cleanup-resources:
-	chmod +x ./bin/kubectl_clean.sh
-	./bin/kubectl_clean.sh
+	chmod +x ./bin/kubectl_delete.sh
+	./bin/kubectl_delete.sh
 
 eks-create-cluster:
 	chmod +x ./bin/eks_create_cluster.sh
