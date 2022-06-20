@@ -6,7 +6,7 @@ setup:
 install:
 	echo "Installing: dependencies..."
 	pip install --upgrade pip &&\
-	pip install -r hello_app/requirements.txt
+	pip install -r requirements.txt
 	echo
 	pytest --version
 	echo
