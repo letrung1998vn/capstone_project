@@ -22,18 +22,20 @@ aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
 ./bin/kubectl get svc
 # Run the Docker Hub container with kubernetes
 echo "Create deployment"
+# ./bin/kubectl create --namespace kube-system -f /root/.kube/config
+# ./bin/kubectl apply -f /root/.kube/config
 ./bin/kubectl edit deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
 echo "Create expose deployment"
 ./bin/kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}
 # List kubernetes resources
 echo
 echo "Listing deployments"
-./bin/kubectl get deployments -o wide
+./bin/kubectl get deployments -o wide --all-namespaces
 echo
 echo "Listing services"
-./bin/kubectl get services -o wide
+./bin/kubectl get services -o wide --all-namespaces
 echo
 echo "Listing pods"
-./bin/kubectl get pods -o wide
-./bin/kubectl get nodes -o wide
+./bin/kubectl get pods -o wide --all-namespaces
+./bin/kubectl get nodes -o wide --all-namespaces
 
