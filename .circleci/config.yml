@@ -69,6 +69,9 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make eks-create-cluster
+      - run:
+          name: deploy eks
+          command: |
             make k8s-deployment
             make port-forwarding
   rolling-update:
