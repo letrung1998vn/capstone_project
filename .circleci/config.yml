@@ -46,6 +46,10 @@ jobs:
             source .devops-capstone/bin/activate
             make build-docker
             make upload-docker
+      - save_cache:
+          paths:
+            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
   create-resource:
     docker:
       - image: amazon/aws-cli
@@ -69,6 +73,10 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make eks-create-cluster
+      - save_cache:
+          paths:
+            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
   deploy-eks:
     docker:
       - image: amazon/aws-cli
@@ -91,6 +99,10 @@ jobs:
           name: deploy eks
           command: |
             make k8s-deployment
+      - save_cache:
+          paths:
+            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
   rolling-update:
     docker:
       - image: python:3.7.3-stretch
