@@ -69,6 +69,24 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make eks-create-cluster
+  deploy-eks:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies
+      - run:
+          name: install dependency
+          command: |
+            yum update -y
+            yum groupinstall -y 'Development Tools'
+            yum install -y python3
+            yum upgrade
+            python3 -m venv .devops-capstone
+            source .devops-capstone/bin/activate
+            make install
       - run:
           name: deploy eks
           command: |
@@ -110,14 +128,14 @@ jobs:
 workflows:
   default:
     jobs:
-      # - init
-      # - deploy-docker:
-          # requires: [init]
-      - create-resource
-          # requires: [deploy-docker]
-      # - deploy-eks:
-      #     requires: [create-resource]
-      - rolling-update:
+      - init
+      - deploy-docker:
+          requires: [init]
+      - create-resource:
+          requires: [deploy-docker]
+      - deploy-eks:
           requires: [create-resource]
+      - rolling-update:
+          requires: [deploy-eks]
       - clean-up:
           requires: [rolling-update]
