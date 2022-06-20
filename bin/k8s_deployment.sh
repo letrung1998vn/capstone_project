@@ -24,10 +24,9 @@ aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
 echo "Create deployment"
 # ./bin/kubectl create --namespace kube-system -f /root/.kube/config
 # ./bin/kubectl apply -f /root/.kube/config
-# ./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
-./bin/kubectl edit deployment ${DEPLOYMENT_NAME}
-echo "Create expose deployment"
-./bin/kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}
+./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
+# ./bin/kubectl edit deployment ${DEPLOYMENT_NAME}
+
 # List kubernetes resources
 echo
 echo "Listing deployments"
