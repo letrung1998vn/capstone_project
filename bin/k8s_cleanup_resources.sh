@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 DEPLOYMENT_NAME="hello-world-app"
-
 # Remove service & deployment
 echo
 echo "Deleting service: ${DEPLOYMENT_NAME}"

@@ -2,13 +2,13 @@
 # environment setup, install, lint and build
 
 #Vars
-CLUSTER_NAME=hello
+CLUSTER_NAME=capstone-cluster
 REGION_NAME=us-east-1
 KEYPAIR_NAME=udapeople
-DEPLOYMENT_NAME=hello-app
-NEW_IMAGE_NAME=registry.hub.docker.com/letrung1998vn/hello-app:latest
+DEPLOYMENT_NAME=hello-world-app
+NEW_IMAGE_NAME=letrung1998vn/hello-world-app:latest
 CONTAINER_PORT=80
-HOST_PORT=8080
+HOST_PORT=80
 KUBECTL=./bin/kubectl
 
 install:

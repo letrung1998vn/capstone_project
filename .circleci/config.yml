@@ -65,32 +65,10 @@ jobs:
             source .devops-capstone/bin/activate
             make install
       - run:
-          name: create eks and start minikube
+          name: create eks
           command: |
             source .devops-capstone/bin/activate
             make eks-create-cluster
-  deploy-eks:
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - checkout
-      - setup_remote_docker
-      - restore_cache:
-          keys:
-            - v1-dependencies
-      - run:
-          name: Install dependencies
-          command: |
-            yum update -y
-            yum groupinstall -y 'Development Tools'
-            yum install -y python3
-            yum upgrade
-            python3 -m venv .devops-capstone
-            source .devops-capstone/bin/activate
-            make install
-      - run:
-          name: deploy eks
-          command: |
             make k8s-deployment
             make port-forwarding
   rolling-update:
@@ -108,11 +86,12 @@ jobs:
 
       - run:
           name: update
-          no_output_timeout: 30m
+          no_output_timeout: 60m
           command: |
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             make rolling-update
+            make rollout-status
 
   clean-up:
     docker:
