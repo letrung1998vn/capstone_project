@@ -112,9 +112,9 @@ workflows:
           requires: [init]
       - create-resource:
           requires: [deploy-docker]
-      - deploy-eks:
-          requires: [create-resource]
+      # - deploy-eks:
+      #     requires: [create-resource]
       - rolling-update:
-          requires: [deploy-eks]
+          requires: [create-resource]
       - clean-up:
           requires: [rolling-update]
