@@ -9,7 +9,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+            - v1-dependencies-{{ checksum "requirements.txt" }}
             # fallback to using the latest cache if no exact match is found
             # - v1-dependencies-
       - run:
@@ -21,7 +21,7 @@ jobs:
       - save_cache:
           paths:
             - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
-          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
       - run:
           name: Run lint
           command: |
@@ -46,7 +46,7 @@ jobs:
       - save_cache:
           paths:
             - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
-          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
   create-resource:
     docker:
       - image: amazon/aws-cli
@@ -73,7 +73,7 @@ jobs:
       - save_cache:
           paths:
             - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
-          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
   deploy-eks:
     docker:
       - image: amazon/aws-cli
@@ -99,7 +99,7 @@ jobs:
       - save_cache:
           paths:
             - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
-          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
   deploy-docker-rolling-update:
     docker:
       - image: cimg/python:3.10.4
@@ -119,7 +119,7 @@ jobs:
       - save_cache:
           paths:
             - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
-          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
   rolling-update:
     docker:
       - image: amazon/aws-cli
