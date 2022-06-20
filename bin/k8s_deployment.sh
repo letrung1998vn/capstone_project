@@ -11,6 +11,11 @@ VERSION=1.000
 
 dockerpath=${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:${VERSION}
 
+# set aws configure
+aws configure set aws_access_key_id AKIAV54HP5HIPYWRQDEO
+aws configure set aws_secret_access_key 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
+aws configure set region us-east-1
+aws sts get-caller-identity
 # Create config file
 aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
 ./bin/kubectl get svc
