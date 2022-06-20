@@ -17,13 +17,14 @@ aws configure set aws_secret_access_key 7JZMJay86Dj5caLtz1Qn4kcCGXXY4KX4+ZY3Okxm
 aws configure set region us-east-1
 aws sts get-caller-identity
 # Create config file
+echo "Create config"
 aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
 ./bin/kubectl get svc
 # Run the Docker Hub container with kubernetes
-./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
-
+echo "Create deployment"
+./bin/kubectl edit deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
+echo "Create expose deployment"
 ./bin/kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}
-
 # List kubernetes resources
 echo
 echo "Listing deployments"
@@ -34,4 +35,5 @@ echo "Listing services"
 echo
 echo "Listing pods"
 ./bin/kubectl get pods -o wide
+./bin/kubectl get nodes -o wide
 
