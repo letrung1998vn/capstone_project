@@ -103,6 +103,7 @@ jobs:
           name: Install tar utility
           command: |
             apt-get install -y tar gzip
+            make install
 
       - run:
           name: update
