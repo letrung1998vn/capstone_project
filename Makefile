@@ -28,7 +28,8 @@ install:
 
 lint:
 	./bin/shellcheck -Cauto -a ./bin/*.sh
-	./bin/hadolint hello_app/Dockerfile
+	./bin/hadolint python-app/Dockerfile
+	./bin/hadolint python-app-update/Dockerfile
 	pylint --disable=R,C,W1203,W1202 python-app/app.py
 	pylint --disable=R,C,W1203,W1202 python-app-update/app.py
 
