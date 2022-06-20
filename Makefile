@@ -57,7 +57,6 @@ ci-validate:
 	circleci config validate
 
 k8s-deployment: eks-create-cluster
-	# If using minikube, first run: minikube start
 	chmod +x ./bin/k8s_deployment.sh
 	./bin/k8s_deployment.sh
 

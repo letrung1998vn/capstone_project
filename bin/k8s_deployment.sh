@@ -13,6 +13,8 @@ dockerpath=${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:${VERSION}
 
 # Run the Docker Hub container with kubernetes
 ./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
+./bin/kubectl config get-contexts
+./bin/kubectl config use-context docker-desktop
 # See the status
 kubectl get deploy,rs,svc,pods
 ./bin/kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}

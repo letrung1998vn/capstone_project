@@ -110,11 +110,11 @@ jobs:
 workflows:
   default:
     jobs:
-      - init
-      - deploy-docker:
-          requires: [init]
-      - create-resource:
-          requires: [deploy-docker]
+      # - init
+      # - deploy-docker:
+          # requires: [init]
+      - create-resource
+          # requires: [deploy-docker]
       # - deploy-eks:
       #     requires: [create-resource]
       - rolling-update:
