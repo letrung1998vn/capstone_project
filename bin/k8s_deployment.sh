@@ -11,17 +11,11 @@ VERSION=1.000
 
 dockerpath=${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:${VERSION}
 
-# List kubernetes resources
-echo
-echo "Listing deployments"
-./bin/kubectl get deployments -o wide
-echo
-echo "Listing services"
-./bin/kubectl get services -o wide
-echo
-echo "Listing pods"
-./bin/kubectl get pods -o wide
-
+# Create config file
+aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
+./bin/kubectl get svc
+# Apply config
+./bin/kubectl apply -f deployment.yaml
 # Run the Docker Hub container with kubernetes
 ./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
 
