@@ -8,8 +8,6 @@ DOCKER_REPOSITORY="hello-world-app"
 DEPLOYMENT_NAME=${DOCKER_REPOSITORY}
 CONTAINER_PORT=80
 VERSION=1.000
-DOCKER_USER="letrung1998vn"
-DOCKER_PWD="socnhi.com1234"
 dockerpath=${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:${VERSION}
 
 # set aws configure
@@ -26,7 +24,6 @@ aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
 echo "Create deployment"
 # ./bin/kubectl create --namespace kube-system -f /root/.kube/config
 # ./bin/kubectl apply -f /root/.kube/config
-docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}
 ./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
 # ./bin/kubectl edit deployment ${DEPLOYMENT_NAME}
 ./bin/kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}

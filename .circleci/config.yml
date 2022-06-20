@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  docker: circleci/docker@1.5.0
-
 jobs:
   init:
     docker:
@@ -44,7 +41,7 @@ jobs:
           command: |
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
-            make build-docker
+            make build-docker-v1
             make upload-docker
       - save_cache:
           paths:
@@ -103,9 +100,29 @@ jobs:
           paths:
             - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
           key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
+  deploy-docker-rolling-update:
+    docker:
+      - image: cimg/python:3.10.4
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - v1-dependencies
+      - run:
+          name: Deploy by makefile
+          command: |
+            python3 -m venv .devops-capstone
+            source .devops-capstone/bin/activate
+            make build-docker-v2
+            make upload-docker
+      - save_cache:
+          paths:
+            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+          key: v1-dependencies-{{ checksum "hello_app/requirements.txt" }}
   rolling-update:
     docker:
-      - image: python:3.7.3-stretch
+      - image: amazon/aws-cli
     steps:
       - checkout
       - restore_cache:
@@ -121,9 +138,16 @@ jobs:
           name: update
           no_output_timeout: 60m
           command: |
+            yum update -y
+            yum groupinstall -y 'Development Tools'
+            yum install -y python3
+            yum upgrade
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
-            make rolling-update
+            aws configure set aws_access_key_id AKIAV54HP5HIPYWRQDEO
+            aws configure set aws_secret_access_key 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
+            aws configure set region us-east-1
+            aws sts get-caller-identity
             make rollout-status
 
   clean-up:
@@ -147,7 +171,9 @@ workflows:
           requires: [deploy-docker]
       - deploy-eks:
           requires: [create-resource]
-      - rolling-update:
+      - deploy-docker-rolling-update:
           requires: [deploy-eks]
+      - rolling-update:
+          requires: [deploy-docker-rolling-update]
       - clean-up:
           requires: [rolling-update]
