@@ -48,7 +48,7 @@ build-docker:
 	chmod +x ./bin/build_docker.sh
 	./bin/build_docker.sh
 
-upload-docker: build-docker
+upload-docker:
 	chmod +x ./bin/upload_docker.sh
 	./bin/upload_docker.sh
 
@@ -56,7 +56,7 @@ ci-validate:
 	# Required file: .circleci/config.yml
 	circleci config validate
 
-k8s-deployment: eks-create-cluster
+k8s-deployment:
 	chmod +x ./bin/k8s_deployment.sh
 	./bin/k8s_deployment.sh
 
