@@ -125,8 +125,8 @@ jobs:
           name: update
           no_output_timeout: 60m
           command: |
-            aws configure set aws_access_key_id AKIASPJPHRDZWOII2ZFL
-            aws configure set aws_secret_access_key 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
+            aws configure set aws_access_key_id AKIASPJPHRDZW7MGKX3C
+            aws configure set aws_secret_access_key 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
             aws configure set region us-east-1
             aws sts get-caller-identity
             make rollout-status
@@ -140,8 +140,8 @@ jobs:
       - run:
           name: Delete resource
           command: |
-            aws configure set aws_access_key_id AKIASPJPHRDZWOII2ZFL
-            aws configure set aws_secret_access_key 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
+            aws configure set aws_access_key_id AKIASPJPHRDZW7MGKX3C
+            aws configure set aws_secret_access_key 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
             aws configure set region us-east-1
             aws sts get-caller-identity
             make cluster-cleanup
