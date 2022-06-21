@@ -165,15 +165,15 @@ workflows:
   default:
     jobs:
       - init
-      # - deploy-docker:
-      #     requires: [init]
-      # - create-resource:
-      #     requires: [deploy-docker]
-      # - deploy-eks:
-      #     requires: [create-resource]
-      # - deploy-docker-rolling-update:
-      #     requires: [deploy-eks]
-      # - rolling-update:
-      #     requires: [deploy-docker-rolling-update]
-      # - clean-up:
-      #     requires: [rolling-update]
+      - deploy-docker:
+          requires: [init]
+      - create-resource:
+          requires: [deploy-docker]
+      - deploy-eks:
+          requires: [create-resource]
+      - deploy-docker-rolling-update:
+          requires: [deploy-eks]
+      - rolling-update:
+          requires: [deploy-docker-rolling-update]
+      - clean-up:
+          requires: [rolling-update]
