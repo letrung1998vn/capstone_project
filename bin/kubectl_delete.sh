@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 DEPLOYMENT_NAME="hello-world-app"
+
+aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
+kubectl get svc
 # Remove service & deployment
 echo
 echo "Deleting service: ${DEPLOYMENT_NAME}"

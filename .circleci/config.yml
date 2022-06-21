@@ -116,16 +116,15 @@ jobs:
             yum update -y
             yum groupinstall -y 'Development Tools'
             yum install -y python3
-            yum install -y python3-pip
             yum upgrade
+            python3 -m venv .devops-capstone
+            source .devops-capstone/bin/activate
             make install
 
       - run:
           name: update
           no_output_timeout: 60m
           command: |
-            python3 -m venv .devops-capstone
-            source .devops-capstone/bin/activate
             aws configure set aws_access_key_id AKIASPJPHRDZWOII2ZFL
             aws configure set aws_secret_access_key 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
             aws configure set region us-east-1
@@ -140,6 +139,10 @@ jobs:
       - run:
           name: Delete resource
           command: |
+            aws configure set aws_access_key_id AKIASPJPHRDZWOII2ZFL
+            aws configure set aws_secret_access_key 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
+            aws configure set region us-east-1
+            aws sts get-caller-identity
             make cluster-cleanup
             make eks-delete-cluster
 
