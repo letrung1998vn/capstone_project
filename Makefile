@@ -45,7 +45,7 @@ build-docker-v2:
 	chmod +x ./bin/build_docker-v2.sh
 	./bin/build_docker-v2.sh
 
-k8s-deployment:
+cluster-deployment:
 	chmod +x ./bin/kubectl_deploy.sh
 	./bin/kubectl_deploy.sh
 
@@ -53,7 +53,7 @@ rollout-status:
 	chmod +x ./bin/rollout_status.sh
 	./bin/rollout_status.sh
 
-k8s-cleanup-resources:
+cluster-cleanup:
 	chmod +x ./bin/kubectl_delete.sh
 	./bin/kubectl_delete.sh
 

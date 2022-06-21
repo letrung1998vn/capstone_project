@@ -95,7 +95,7 @@ jobs:
       - run:
           name: deploy eks
           command: |
-            make k8s-deployment
+            make cluster-deployment
       - save_cache:
           paths:
             - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
@@ -158,7 +158,7 @@ jobs:
       - run:
           name: Delete resource
           command: |
-            make k8s-cleanup-resource
+            make cluster-cleanup
             make eks-delete-cluster
 
 workflows:

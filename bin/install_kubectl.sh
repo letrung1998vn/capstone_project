@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
 
-OS=$(uname | tr "[:upper:]" "[:lower:]")
-COMMAND="kubectl"
-
-test -e ./bin/${COMMAND} ||
-    {
-        curl -sSLo ./bin/${COMMAND} "https://dl.k8s.io/release/$(curl -L -s \
-            https://dl.k8s.io/release/stable.txt)/bin/${OS}/amd64/kubectl"
-        chmod +x ./bin/${COMMAND}
-    }
-
-echo "./bin/${COMMAND}: $(./bin/${COMMAND} version --client)"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x ./bin/kubectl
+mkdir -p ~/.local/bin
+mv ./kubectl ~/.local/bin/kubectl
+export PATH=~/.local/bin:$PATH
+kubectl version --client
