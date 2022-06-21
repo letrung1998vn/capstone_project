@@ -11,8 +11,8 @@ VERSION=lastest
 dockerpath=${DOCKER_HUB_ID}/${DOCKER_REPOSITORY}:${VERSION}
 
 # set aws configure
-aws configure set aws_access_key_id AKIAV54HP5HIC6FCWDQP
-aws configure set aws_secret_access_key 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
+aws configure set aws_access_key_id AKIAV54HP5HILPQVAXZX
+aws configure set aws_secret_access_key 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
 aws configure set region us-east-1
 aws sts get-caller-identity
 # Create config file
