@@ -3,11 +3,11 @@
 OS=$(uname | tr "[:upper:]" "[:lower:]")
 COMMAND="kubectl"
 
-test -e ${COMMAND} ||
+test -e ./bin/${COMMAND} ||
     {
-        curl -sSLo ${COMMAND} "https://dl.k8s.io/release/$(curl -L -s \
+        curl -sSLo ./bin/${COMMAND} "https://dl.k8s.io/release/$(curl -L -s \
             https://dl.k8s.io/release/stable.txt)/bin/${OS}/amd64/kubectl"
-        chmod +x ${COMMAND}
+        chmod +x ./bin/${COMMAND}
     }
-
+export PATH=./bin/kubectl:$PATH
 echo "${COMMAND}: $(${COMMAND} version --client)"
