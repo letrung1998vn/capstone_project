@@ -6,12 +6,9 @@ jobs:
       - image: python:3.7.3-stretch
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            # - v1-dependencies-
       - run:
           name: Install dependencies
           command: |
@@ -20,7 +17,7 @@ jobs:
             make install
       - save_cache:
           paths:
-            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+            - ./.devops-capstone/bin
           key: v1-dependencies-{{ checksum "requirements.txt" }}
       - run:
           name: Run lint
@@ -45,7 +42,7 @@ jobs:
             make upload-docker
       - save_cache:
           paths:
-            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+            - ./.devops-capstone/bin
           key: v1-dependencies-{{ checksum "requirements.txt" }}
   create-resource:
     docker:
@@ -72,7 +69,7 @@ jobs:
             make eks-create-cluster
       - save_cache:
           paths:
-            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+            - ./.devops-capstone/bin
           key: v1-dependencies-{{ checksum "requirements.txt" }}
   deploy-eks:
     docker:
@@ -98,7 +95,7 @@ jobs:
             make cluster-deployment
       - save_cache:
           paths:
-            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+            - ./.devops-capstone/bin
           key: v1-dependencies-{{ checksum "requirements.txt" }}
   deploy-docker-rolling-update:
     docker:
@@ -118,7 +115,7 @@ jobs:
             make upload-docker
       - save_cache:
           paths:
-            - ./.devops-capstone/bin # TODO: Include in cache the "bin" directory
+            - ./.devops-capstone/bin
           key: v1-dependencies-{{ checksum "requirements.txt" }}
   rolling-update:
     docker:
@@ -131,7 +128,7 @@ jobs:
       - run:
           name: Install tar utility
           command: |
-            apt-get install -y tar gzip
+            yum install -y tar gzip
             make install
 
       - run:
