@@ -113,16 +113,16 @@ jobs:
           name: Install tar utility
           command: |
             yum install -y tar gzip
+            yum update -y
+            yum groupinstall -y 'Development Tools'
+            yum install -y python3
+            yum upgrade
             make install
 
       - run:
           name: update
           no_output_timeout: 60m
           command: |
-            yum update -y
-            yum groupinstall -y 'Development Tools'
-            yum install -y python3
-            yum upgrade
             python3 -m venv .devops-capstone
             source .devops-capstone/bin/activate
             aws configure set aws_access_key_id AKIASPJPHRDZWOII2ZFL
