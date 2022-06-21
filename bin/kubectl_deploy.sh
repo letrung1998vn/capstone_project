@@ -17,6 +17,8 @@ aws configure set region us-east-1
 aws sts get-caller-identity
 # Create config file
 echo "Create config"
+aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
+kubectl get svc
 # Run the Docker Hub container with kubernetes
 echo "Create deployment"
 kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
