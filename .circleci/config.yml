@@ -158,7 +158,7 @@ workflows:
       #     requires: [create-resource]
       # - deploy-docker-rolling-update:
       #     requires: [deploy-eks]
-      - rolling-update
+      # - rolling-update:
           # requires: [deploy-docker-rolling-update]
-      # - clean-up:
+      - clean-up
       #     requires: [rolling-update]
