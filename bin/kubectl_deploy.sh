@@ -19,23 +19,22 @@ aws sts get-caller-identity
 echo "Create config"
 # Assuming the Kubernetes cluster is ready
 aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
-./bin/kubectl get svc
+kubectl get svc
 # Run the Docker Hub container with kubernetes
 echo "Create deployment"
-# ./bin/kubectl create --namespace kube-system -f /root/.kube/config
-# ./bin/kubectl apply -f /root/.kube/config
-./bin/kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
-# ./bin/kubectl edit deployment ${DEPLOYMENT_NAME}
-./bin/kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}
+kubectl create deployment ${DEPLOYMENT_NAME} --image=${dockerpath}
+
+kubectl expose deployment/${DEPLOYMENT_NAME} --type="LoadBalancer" --port ${CONTAINER_PORT}
+
 # List kubernetes resources
 echo
 echo "Listing deployments"
-./bin/kubectl get deployments -o wide --all-namespaces
+kubectl get deployments -o wide --all-namespaces
 echo
 echo "Listing services"
-./bin/kubectl get services -o wide --all-namespaces
+kubectl get services -o wide --all-namespaces
 echo
 echo "Listing pods"
-./bin/kubectl get pods -o wide --all-namespaces
-./bin/kubectl get nodes -o wide --all-namespaces
+kubectl get pods -o wide --all-namespaces
+kubectl get nodes -o wide --all-namespaces
 
