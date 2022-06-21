@@ -9,6 +9,6 @@ test -e ./bin/${COMMAND} ||
             https://dl.k8s.io/release/stable.txt)/bin/${OS}/amd64/kubectl"
         chmod +x ./bin/${COMMAND}
     }
-mv ./bin/kubectl ~/.local/bin/kubectl
-export PATH=~/.local/bin/kubectl:$PATH
+mv ./bin/kubectl /bin/kubectl
+export PATH=/bin/kubectl:$PATH
 echo "${COMMAND}: $(${COMMAND} version --client)"
