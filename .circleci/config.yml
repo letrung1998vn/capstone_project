@@ -116,6 +116,7 @@ jobs:
             yum update -y
             yum groupinstall -y 'Development Tools'
             yum install -y python3
+            yum install -y python3-pip
             yum upgrade
             make install
 
@@ -145,16 +146,16 @@ jobs:
 workflows:
   default:
     jobs:
-      - init
-      - deploy-docker:
-          requires: [init]
-      - create-resource:
-          requires: [deploy-docker]
-      - deploy-eks:
-          requires: [create-resource]
-      - deploy-docker-rolling-update:
-          requires: [deploy-eks]
-      - rolling-update:
-          requires: [deploy-docker-rolling-update]
+      # - init
+      # - deploy-docker:
+      #     requires: [init]
+      # - create-resource:
+      #     requires: [deploy-docker]
+      # - deploy-eks:
+      #     requires: [create-resource]
+      # - deploy-docker-rolling-update:
+      #     requires: [deploy-eks]
+      - rolling-update
+          # requires: [deploy-docker-rolling-update]
       # - clean-up:
       #     requires: [rolling-update]
