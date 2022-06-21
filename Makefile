@@ -49,10 +49,6 @@ cluster-deployment:
 	chmod +x ./bin/kubectl_deploy.sh
 	./bin/kubectl_deploy.sh
 
-cluster-deployment-rolling-update:
-	chmod +x ./bin/kubectl_deploy_rolling.sh
-	./bin/kubectl_deploy_rolling.sh
-
 rollout-status:
 	chmod +x ./bin/rollout_status.sh
 	./bin/rollout_status.sh

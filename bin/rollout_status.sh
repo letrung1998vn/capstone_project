@@ -12,8 +12,7 @@ aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
 kubectl get svc
 
 # get rollout status of cluster
-kubectl set image ${DEPLOYMENT_NAME}=${dockerpath}
-kubectl edit deployment ${DEPLOYMENT_NAME}
+kubectl patch deployment ${DEPLOYMENT_NAME} -p "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"${DOCKER_REPOSITORY}\",\"image\":\"${dockerpath}\",\"imagePullPolicy\": \"Always\"}]}}}}"
 kubectl rollout status deployment ${DEPLOYMENT_NAME}
 echo
 kubectl get deployments -o wide
