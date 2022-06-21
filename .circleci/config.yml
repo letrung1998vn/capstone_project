@@ -130,7 +130,6 @@ jobs:
             aws configure set region us-east-1
             aws sts get-caller-identity
             make rollout-status
-            make cluster-deployment-rolling-update
 
   clean-up:
     docker:
