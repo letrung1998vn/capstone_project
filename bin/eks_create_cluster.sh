@@ -8,5 +8,5 @@ aws configure set region us-east-1
 aws sts get-caller-identity
 aws eks --region us-east-1 update-kubeconfig --name capstone-cluster
 kubectl get svc
-./bin/eksctl create cluster -f cluster.yml
+./bin/eksctl upgrade cluster -f cluster.yml
 

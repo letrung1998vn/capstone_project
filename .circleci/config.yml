@@ -40,10 +40,6 @@ jobs:
             source .devops-capstone/bin/activate
             make build-docker-v1
             make upload-docker
-      - save_cache:
-          paths:
-            - ./.devops-capstone/bin
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
   create-resource:
     docker:
       - image: amazon/aws-cli
@@ -67,10 +63,6 @@ jobs:
           command: |
             source .devops-capstone/bin/activate
             make eks-create-cluster
-      - save_cache:
-          paths:
-            - ./.devops-capstone/bin
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
   deploy-eks:
     docker:
       - image: amazon/aws-cli
@@ -93,10 +85,6 @@ jobs:
           name: deploy eks
           command: |
             make cluster-deployment
-      - save_cache:
-          paths:
-            - ./.devops-capstone/bin
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
   deploy-docker-rolling-update:
     docker:
       - image: cimg/python:3.10.4
@@ -113,10 +101,6 @@ jobs:
             source .devops-capstone/bin/activate
             make build-docker-v2
             make upload-docker
-      - save_cache:
-          paths:
-            - ./.devops-capstone/bin
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
   rolling-update:
     docker:
       - image: amazon/aws-cli
@@ -168,9 +152,9 @@ workflows:
           requires: [deploy-docker]
       - deploy-eks:
           requires: [create-resource]
-      # - deploy-docker-rolling-update:
-      #     requires: [deploy-eks]
-      # - rolling-update:
-      #     requires: [deploy-docker-rolling-update]
+      - deploy-docker-rolling-update:
+          requires: [deploy-eks]
+      - rolling-update:
+          requires: [deploy-docker-rolling-update]
       # - clean-up:
       #     requires: [rolling-update]
