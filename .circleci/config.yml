@@ -133,9 +133,20 @@ jobs:
 
   clean-up:
     docker:
-      - image: python:3.7.3-stretch
+      - image: amazon/aws-cli
     steps:
       - checkout
+      - run:
+          name: Install dependency
+          command: |
+            yum install -y tar gzip
+            yum update -y
+            yum groupinstall -y 'Development Tools'
+            yum install -y python3
+            yum upgrade
+            python3 -m venv .devops-capstone
+            source .devops-capstone/bin/activate
+            make install
       - run:
           name: Delete resource
           command: |
