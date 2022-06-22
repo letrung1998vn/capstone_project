@@ -24,7 +24,7 @@ In this project I applied the skills and knowledge which were developed througho
 I made two application, one in python-app folder as v1 app and one in python-app-update folder as v2 for demonstrating the rolling update.
 I deployed the cluster with the v1 application in python-app folder first then updated the docker image with v2 application in python-app-update folder and did the rolling update.
 
-All screenshots are attached in images folder.
+All screenshots are attached in img folder.
 
 The following shell scripts are invoked from the [Makefile](./Makefile)
 
