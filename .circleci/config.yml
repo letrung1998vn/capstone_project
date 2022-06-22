@@ -171,5 +171,5 @@ workflows:
           requires: [deploy-eks]
       - rolling-update:
           requires: [deploy-docker-rolling-update]
-      - clean-up:
-          requires: [rolling-update]
+      # - clean-up:
+      #     requires: [rolling-update]

@@ -26,6 +26,8 @@ I deployed the cluster with the v1 application in python-app folder first then u
 
 All screenshots are attached in img folder.
 
+The GitHub Link of my project: https://github.com/letrung1998vn/capstone_project
+
 The following shell scripts are invoked from the [Makefile](./Makefile)
 
 * [eks_create_cluster.sh](./bin/eks_create_cluster.sh): creates the EKS cluster
